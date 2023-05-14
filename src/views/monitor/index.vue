@@ -17,7 +17,7 @@
 <script setup lang='ts'>
 import { ref, reactive, onMounted } from 'vue'
 import { RemoveClass, AddClass, RemoveAllChildClass } from '@/utils/simple'
-
+import { GetStream, GetStream2, GetStream3, GetStream4 } from '../peer'
 const jk1S = ref(true)
 const jk2S = ref(true)
 const jk3S = ref(true)
@@ -25,11 +25,12 @@ const jk4S = ref(true)
 
 
 
-function createVideoPlayer(id: string) {
+function createVideoPlayer(id: string, object: any) {
     // 创建video元素
     const videoElement = document.createElement('video');
     videoElement.controls = true;
     videoElement.id = id
+    videoElement.srcObject = object;
     // 将video元素添加到id为"jk"的父元素上
     const container = document.getElementById('jk');
     container?.appendChild(videoElement);
@@ -58,7 +59,7 @@ onMounted(() => {
         if (jk1S.value) {
             AddClass(jk1, "bg-success")
             jk1S.value = false
-            createVideoPlayer("v1")
+            createVideoPlayer("v1", GetStream())
         } else {
             RemoveClass(jk1, "bg-success")
             destroyVideoPlayer("v1")
@@ -71,7 +72,7 @@ onMounted(() => {
         if (jk2S.value) {
             AddClass(jk2, "bg-success")
             jk2S.value = false
-            createVideoPlayer("v2")
+            createVideoPlayer("v2", GetStream2())
         } else {
             RemoveClass(jk2, "bg-success")
             jk2S.value = true
@@ -82,7 +83,7 @@ onMounted(() => {
         if (jk3S.value) {
             AddClass(jk3, "bg-success")
             jk3S.value = false
-            createVideoPlayer("v3")
+            createVideoPlayer("v3", GetStream3())
         } else {
             RemoveClass(jk3, "bg-success")
             jk3S.value = true
@@ -93,7 +94,7 @@ onMounted(() => {
         if (jk4S.value) {
             AddClass(jk4, "bg-success")
             jk4S.value = false
-            createVideoPlayer("v4")
+            createVideoPlayer("v4", GetStream4())
         } else {
             RemoveClass(jk4, "bg-success")
             jk4S.value = true
