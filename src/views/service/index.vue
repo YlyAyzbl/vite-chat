@@ -4,7 +4,7 @@
         <h1>图传状态:{{ peerStatus }}</h1>
         <h1 class="badge text-bg-danger" id="peer">Success</h1>
         <h1>图传状态:{{ carStatus }}</h1>
-        <h1 class="badge text-bg-danger" id="peer">Success</h1>
+        <h1 class="badge text-bg-danger" id="car">Success</h1>
         <h1>通讯状态:{{ socketStatus }}</h1>
         <h1 class="badge text-bg-danger" id="socket">Success</h1>
     </div>
@@ -22,6 +22,7 @@ const carStatus = ref('与小车连接失败')
 
 onMounted(() => {
     var peer = document.getElementById("peer")
+    var car = document.getElementById("car")
     var socket = document.getElementById("socket")
 
     function StatusTest() {
@@ -37,8 +38,8 @@ onMounted(() => {
         }
         if (GetCarStatus()) {
             carStatus.value = '与小车连接成功'
-            AddClass(peer, "text-bg-success")
-            RemoveClass(peer, "text-bg-danger")
+            AddClass(car, "text-bg-success")
+            RemoveClass(car, "text-bg-danger")
         }
     }
 

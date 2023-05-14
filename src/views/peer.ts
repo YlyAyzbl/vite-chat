@@ -266,8 +266,8 @@ peer4.on('open', function (id) {
         console.log('应该发送了')
         call.on('stream', function (remoteStream) {
             Stream4.value = remoteStream
+            console.log(remoteStream)
             console.log("收到回复4")
-
         });
     }, function (err: any) {
         console.log('无法连接监控3', err);
@@ -282,30 +282,30 @@ peer4.on('open', function (id) {
 
 
 
+function GetStream4() {
 
+    return Stream4.value
+
+}
 
 
 
 function GetStream() {
-    if (Stream.value != emptyVideoStream) {
-        return Stream.value
-    }
+
+    return Stream.value
+
 }
 function GetStream2() {
-    if (Stream2.value != emptyVideoStream) {
-        return Stream2.value
-    }
+
+    return Stream2.value
+
 }
 function GetStream3() {
-    if (Stream3.value != emptyVideoStream) {
-        return Stream3.value
-    }
+
+    return Stream3.value
+
 }
-function GetStream4() {
-    if (Stream4.value != emptyVideoStream) {
-        return Stream4.value
-    }
-}
+
 
 
 
