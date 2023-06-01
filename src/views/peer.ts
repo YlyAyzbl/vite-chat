@@ -111,7 +111,7 @@ const canvas = Object.assign(document.createElement('canvas'), {
 });
 const ctx = canvas.getContext('2d');
 if (ctx != null) {
-    ctx.fillStyle = '#000000';
+    ctx.fillStyle = '#00FF00';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
 

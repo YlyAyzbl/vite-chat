@@ -7,7 +7,7 @@
 </template>
   
 <script setup lang='ts'>
-import { onMounted, ref } from "vue";
+import { onMounted, reactive, ref } from "vue";
 import { Root, GetPoint, GetIfSend } from "./data"
 import { Chat } from "./chat";
 const { virtual, rocker } = Root()
@@ -15,17 +15,46 @@ interface Data {
     type: string;
     msg: string;
 }
+const shang = reactive({ // 原点
+    x: 0,
+    y: 1
+})
+const xia = reactive({ // 原点
+    x: 0,
+    y: -1
+})
+const zuo = reactive({ // 原点
+    x: -1,
+    y: 0
+})
+const you = reactive({ // 原点
+    x: 1,
+    y: 0
+})
 
 const time = ref<number>(0)
 
 onMounted(() => {
-    function sendMsg() {
+
+
+
+    function sendMsg() { // 主要改动这段代码，这里把传入的0-255转换为了-1到1之间的值发送，想恢复的话删除ifSend的判断就好
+        const msg: Data = { type: 'move', msg: JSON.stringify({ x: 0, y: 0 }) }
         const ifSend = GetIfSend()
         const point = GetPoint()
         if (ifSend) {
-            const msg: Data = { type: 'move', msg: JSON.stringify(point) }
+            if (point.x > 150) {
+                msg.msg = JSON.stringify(you)
+            } else if (point.x < -150) {
+                msg.msg = JSON.stringify(zuo)
+            } else if (point.y > 150) {
+                msg.msg = JSON.stringify(shang)
+            } else if (point.y < -150) {
+                msg.msg = JSON.stringify(xia)
+            }
+
             Chat(msg)
-            console.log('发送', JSON.stringify(point))
+            console.log('发送', JSON.stringify(msg.msg))
             time.value = 0
         } else {
             if (time.value < 10) {
